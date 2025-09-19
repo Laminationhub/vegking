@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veg King Fastfood and Cafe</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Define custom fonts for Tailwind */
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-hero-pattern {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .bg-hero-pattern::before {
+            content: '';
+            position: absolute;
+            top: -20px; right: -20px; bottom: -20px; left: -20px; /* Extends to hide blur edges */
+            background-image: url('https://raw.githubusercontent.com/Laminationhub/vegking/main/upper%20banner.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            z-index: -2;
+        }
+        .bg-hero-pattern::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+        /* Spinner for loading state */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ca8a04; /* amber-500 */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex items-center justify-start">
+            <!-- Logo -->
+            <img src="https://raw.githubusercontent.com/Laminationhub/vegking/main/vegking%20logo.png" alt="Veg King Logo" class="h-14 w-14 sm:h-16 sm:w-16 mr-3">
+            <!-- Restaurant Name -->
+            <h1 class="text-xl md:text-2xl font-poppins text-gray-800 leading-tight">
+                VEG KING <br class="sm:hidden">
+                <span class="text-amber-500">FASTFOOD AND CAFE</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-hero-pattern bg-cover bg-center text-white h-[60vh] flex items-center">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-poppins leading-tight mb-4">Taste the Freshness in Every Bite</h2>
+            <p class="text-lg md:text-xl mb-8">Your destination for delicious vegetarian delights, from classic Indian to global favorites.</p>
+            <a href="#menu" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 text-lg">
+                View Our Menu
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        
+        <!-- About Us Section -->
+        <section id="about" class="mb-16">
+            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                <h2 class="text-3xl font-poppins text-amber-500 mb-4">Welcome to Veg King</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    At Veg King Fastfood and Cafe, we believe in serving fresh, flavorful, and high-quality vegetarian food. Our diverse menu offers a delightful journey, from sizzling noodles and aromatic rice to cheesy pizzas and classic Indian chai. Every dish is prepared with love and the finest ingredients to ensure a memorable dining experience.
+                </p>
+                <!-- Special Offers -->
+                <div class="border-t pt-6 flex flex-col md:flex-row justify-center items-center gap-8">
+                    <div class="bg-green-100 text-green-800 p-4 rounded-lg flex items-center gap-3 font-semibold">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>FREE Home Delivery!</span>
+                    </div>
+                    <div class="bg-pink-100 text-pink-800 p-4 rounded-lg flex items-center gap-3 font-semibold">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.385l-3-3-3 3-3-3-3 3-3-3-3 3V5a2 2 0 012-2h14a2 2 0 012 2v10.385z"></path></svg>
+                        <span>Special Discount for Birthday Parties</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu">
+            <h2 class="text-4xl font-poppins text-center mb-4 text-gray-800">Our Menu</h2>
+
+             <!-- Gemini Feature Button -->
+            <div class="text-center mb-10">
+                <button id="show-gemini-modal" class="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-lg transform hover:scale-105">
+                    ✨ Suggest a Meal For Me
+                </button>
+            </div>
+            
+            <!-- Search Box -->
+            <div class="max-w-md mx-auto mb-10">
+                <input type="text" id="menu-search" placeholder="Search for your favorite dish..." class="w-full px-5 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition duration-300">
+            </div>
+            
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                <!-- Special Combo -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category md:col-span-2">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/cefbe458f80868e2198af6f2bd8242b486929939/combo.png" alt="Special food combos" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Special Combo</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Manchurian + Rice + Coke</span> <span class="font-semibold">₹129</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Pizza + Finger + Coke</span> <span class="font-semibold">₹99</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Chowmein + Pizza + Chilli Potato + Coke</span> <span class="font-semibold">₹179</span></div>
+                    </div>
+                </div>
+
+                <!-- Noodles Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/cefbe458f80868e2198af6f2bd8242b486929939/noodels.png" alt="A delicious bowl of vegetarian noodles" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Noodles</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Chowmein</span> <span class="font-semibold">H: ₹40 | F: ₹70</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Chowmein</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Mushroom Chowmein</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Hakka Noodles</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Veg King Special Chowmein</span> <span class="font-semibold">H: ₹60 | F: ₹100</span></div>
+                    </div>
+                </div>
+
+                <!-- Rice Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/cefbe458f80868e2198af6f2bd8242b486929939/fried%20rice.png" alt="Aromatic vegetarian fried rice in a bowl" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Rice</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Fried Rice</span> <span class="font-semibold">H: ₹40 | F: ₹70</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Fried Rice</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Triple Fried Rice</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Mushroom Fried Rice</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Schezwan Fried Rice</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                    </div>
+                </div>
+                
+                <!-- Pizza Categories -->
+                <div class="bg-white p-6 rounded-lg shadow-lg md:col-span-2 menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/cefbe458f80868e2198af6f2bd8242b486929939/pizza.png" alt="A variety of vegetarian pizzas" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Pizza</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 text-gray-700">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-gray-800 border-b-2 border-amber-200 pb-1">Classic Veg</h4>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Margherita Pizza</span> <span class="font-semibold">₹69</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Onion Pizza</span> <span class="font-semibold">₹69</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Tomato Pizza</span> <span class="font-semibold">₹69</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Capsicum Pizza</span> <span class="font-semibold">₹69</span></div>
+                        </div>
+                        <div>
+                             <h4 class="font-bold text-lg mb-2 text-gray-800 border-b-2 border-amber-200 pb-1">Simply Veg</h4>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Cheese & Corn</span> <span class="font-semibold">R: ₹79 | M: ₹140</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Spring Pizza</span> <span class="font-semibold">R: ₹89 | M: ₹149</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Delight Pizza</span> <span class="font-semibold">R: ₹89 | M: ₹149</span></div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-gray-800 border-b-2 border-amber-200 pb-1">Speciality Veg</h4>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Paneer Tikka Pizza</span> <span class="font-semibold">R: ₹149 | M: ₹249</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Delight Special Pizza</span> <span class="font-semibold">R: ₹149 | M: ₹249</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Hot Spicy Pizza</span> <span class="font-semibold">R: ₹149 | M: ₹249</span></div>
+                            <div class="flex justify-between mt-2 menu-item-entry"><span>Veg King Special Pizza</span> <span class="font-semibold">R: ₹149 | M: ₹249</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Bites Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/cefbe458f80868e2198af6f2bd8242b486929939/Quick%20Bites.png" alt="A plate of crispy paneer chilli" class="w-full h-48 object-cover rounded-md mb-4">
+                     <h3 class="text-2xl font-poppins text-amber-500 mb-4">Quick Bites</h3>
+                     <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Chilli (Dry/Gravy)</span> <span class="font-semibold">H: ₹70 | F: ₹130</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Manchurian (Dry/Gravy)</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Chilli Potato</span> <span class="font-semibold">H: ₹40 | F: ₹80</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Honey Chilli Potato</span> <span class="font-semibold">H: ₹50 | F: ₹90</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">French Fries (Finger)</span> <span class="font-semibold">H: ₹40 | F: ₹70</span></div>
+                    </div>
+                </div>
+                
+                <!-- Sandwich Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/sandwitch.png" alt="A stacked vegetarian club sandwich" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Sandwich</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Sandwich</span> <span class="font-semibold">₹40</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Sandwich</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Cheese Sandwich</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Cheese Corn Sandwich</span> <span class="font-semibold">₹60</span></div>
+                    </div>
+                </div>
+
+                <!-- Maggi Category -->
+                 <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/maggi.png" alt="A bowl of hot Maggi noodles" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Maggi</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Maggi</span> <span class="font-semibold">₹40</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Maggi</span> <span class="font-semibold">₹50</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Cheese Maggi</span> <span class="font-semibold">₹60</span></div>
+                    </div>
+                </div>
+
+                <!-- Puri Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/puri.png" alt="A plate of Sev Puri" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Puri</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Sev Puri (6 pcs)</span> <span class="font-semibold">₹30</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Dahi Puri (6 pcs)</span> <span class="font-semibold">₹20</span></div>
+                    </div>
+                </div>
+                
+                <!-- Chai Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/chai.png" alt="A cup of hot Indian masala chai" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Chai</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Plain Tea</span> <span class="font-semibold">₹15</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Masala Tea</span> <span class="font-semibold">₹15</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Elaichi Tea</span> <span class="font-semibold">₹15</span></div>
+                    </div>
+                </div>
+
+                <!-- Burger Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/burger.png" alt="A juicy vegetarian cheeseburger" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Burger</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Burger</span> <span class="font-semibold">₹30</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Burger</span> <span class="font-semibold">₹50</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Cheese Burger</span> <span class="font-semibold">₹50</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Butter Burger</span> <span class="font-semibold">₹40</span></div>
+                    </div>
+                </div>
+
+                 <!-- Momos & Roll Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/momo%20%26%20roll.png" alt="A plate of steamed vegetarian momos" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Momos & Roll</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Momos</span> <span class="font-semibold">H: ₹20 | F: ₹40</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Paneer Momos</span> <span class="font-semibold">H: ₹30 | F: ₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Kurkure Momos</span> <span class="font-semibold">H: ₹40 | F: ₹80</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Veg Spring Roll</span> <span class="font-semibold">H: ₹30 | F: ₹60</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Paneer Spring Roll</span> <span class="font-semibold">H: ₹40 | F: ₹70</span></div>
+                    </div>
+                </div>
+
+                <!-- Shakes & Drinks Category -->
+                <div class="bg-white p-6 rounded-lg shadow-lg menu-category">
+                    <img src="https://raw.githubusercontent.com/Laminationhub/vegking/de49012e75df27b7f939f9bb4116ac3bb517544c/shakes%20%26%20drinks.png" alt="Colorful milkshakes and mojitos" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-poppins text-amber-500 mb-4">Shake & Drinks</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Cold Coffee</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Strawberry Shake</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Blueberry Shake</span> <span class="font-semibold">₹80</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Mango Shake</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Butter Scotch Shake</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Mint Mojito</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Green Apple</span> <span class="font-semibold">₹60</span></div>
+                        <div class="flex justify-between border-b pb-2 menu-item-entry"><span class="font-bold">Spicy Mango</span> <span class="font-semibold">₹70</span></div>
+                        <div class="flex justify-between menu-item-entry"><span class="font-bold">Lemon Ice Tea</span> <span class="font-semibold">₹60</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Contact & Location Section -->
+        <section id="contact" class="mt-16">
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-poppins text-amber-500 text-center mb-8">Find Us</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Contact Info -->
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-amber-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Address</h4>
+                                <p class="text-gray-600">Near Sana Collection & Hanuman Garhi, Kurebhar, Sultanpur, Uttar Pradesh - 228151</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-amber-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Phone</h4>
+                                <p class="text-gray-600">+91 85709 59887</p>
+                                <p class="text-gray-600">+91 76071 92203</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                             <svg class="w-6 h-6 text-amber-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Opening Hours</h4>
+                                <p class="text-gray-600">Open Daily: 11:00 AM - 11:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Google Map -->
+                    <div>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57224.58042459836!2d82.19945139395759!3d26.37568113946393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399a770634915663%3A0x2f483c2a4a753258!2sKurebhar%2C%20Uttar%20Pradesh%20228151!5e0!3m2!1sen!2sin!4v1678886864317!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="350" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="rounded-lg shadow-md">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Gemini AI Modal -->
+    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg relative transform transition-all scale-95 opacity-0" id="gemini-modal-content">
+            <button id="close-gemini-modal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-2xl font-poppins text-amber-500 mb-4">✨ AI Meal Suggester</h2>
+            <p class="text-gray-600 mb-4">Tell me what you're craving, and I'll suggest something delicious from our menu!</p>
+            <textarea id="gemini-prompt" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" rows="3" placeholder="e.g., 'A light and healthy snack' or 'Something cheesy for my family'"></textarea>
+            <button id="get-gemini-suggestion" class="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                Get Suggestions
+            </button>
+            <div id="gemini-result-container" class="mt-5">
+                <div id="gemini-loader" class="hidden mx-auto loader"></div>
+                <div id="gemini-result" class="text-gray-700 bg-gray-50 p-4 rounded-md"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>&copy; 2025 VEG KING FASTFOOD AND CAFE. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth Scroll JS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Menu Search Functionality
+        const searchInput = document.getElementById('menu-search');
+        const menuCategories = document.querySelectorAll('.menu-category');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+
+            menuCategories.forEach(category => {
+                const menuItems = category.querySelectorAll('.menu-item-entry');
+                let categoryHasVisibleItem = false;
+
+                menuItems.forEach(item => {
+                    const itemName = item.textContent.toLowerCase();
+                    if (itemName.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        categoryHasVisibleItem = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (category.querySelectorAll('.lg\\:grid-cols-3').length > 0) {
+                     const pizzaSubSections = category.querySelectorAll('div > h4');
+                     pizzaSubSections.forEach(subSection => {
+                         let parentDiv = subSection.parentElement;
+                         const subItems = parentDiv.querySelectorAll('.menu-item-entry');
+                         const hasVisibleSubItem = Array.from(subItems).some(item => item.style.display !== 'none');
+                         if(hasVisibleSubItem) categoryHasVisibleItem = true;
+                     });
+                }
+
+                if (categoryHasVisibleItem) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+
+        // Gemini API Feature
+        const geminiModal = document.getElementById('gemini-modal');
+        const geminiModalContent = document.getElementById('gemini-modal-content');
+        const showGeminiModalBtn = document.getElementById('show-gemini-modal');
+        const closeGeminiModalBtn = document.getElementById('close-gemini-modal');
+        const getSuggestionBtn = document.getElementById('get-gemini-suggestion');
+        const geminiPrompt = document.getElementById('gemini-prompt');
+        const geminiResult = document.getElementById('gemini-result');
+        const geminiLoader = document.getElementById('gemini-loader');
+
+        const openModal = () => {
+            geminiModal.classList.remove('hidden');
+            setTimeout(() => {
+                geminiModalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        };
+
+        const closeModal = () => {
+            geminiModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                geminiModal.classList.add('hidden');
+            }, 200);
+        };
+
+        showGeminiModalBtn.addEventListener('click', openModal);
+        closeGeminiModalBtn.addEventListener('click', closeModal);
+        geminiModal.addEventListener('click', (e) => {
+            if (e.target === geminiModal) {
+                closeModal();
+            }
+        });
+
+        function getFullMenuText() {
+            let menuText = '';
+            document.querySelectorAll('.menu-category').forEach(category => {
+                const title = category.querySelector('h3').textContent;
+                menuText += `\n**${title}**\n`;
+                category.querySelectorAll('.menu-item-entry').forEach(item => {
+                    menuText += `- ${item.textContent.trim().replace(/\s+/g, ' ')}\n`;
+                });
+            });
+            return menuText;
+        }
+
+        async function getMealSuggestions() {
+            const userInput = geminiPrompt.value;
+            if (!userInput.trim()) {
+                geminiResult.innerHTML = "Please tell me what you're in the mood for!";
+                return;
+            }
+
+            geminiLoader.classList.remove('hidden');
+            geminiResult.innerHTML = '';
+            
+            const menuText = getFullMenuText();
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const systemPrompt = "You are a friendly and helpful AI assistant for 'VEG KING FASTFOOD AND CAFE'. Your goal is to help customers choose a meal by providing suggestions based on their preferences and the restaurant's menu. Always be enthusiastic and format your response clearly using bullet points or numbered lists with bold headings for the suggested dishes. Keep the suggestions concise and creative.";
+            const userQuery = `Based on our menu below, please suggest a meal for a customer who is looking for: "${userInput}".\n\nMENU:\n${menuText}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    let suggestionText = candidate.content.parts[0].text;
+                    suggestionText = suggestionText.replace(/\*\*(.*?)\*\*/g, '<strong class="text-amber-600">$1</strong>');
+                    suggestionText = suggestionText.replace(/\n/g, '<br>');
+                    geminiResult.innerHTML = suggestionText;
+                } else {
+                    geminiResult.innerHTML = "Sorry, I couldn't come up with a suggestion right now. Please try again.";
+                }
+
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                geminiResult.innerHTML = "There was an issue getting your suggestion. Please check your connection and try again.";
+            } finally {
+                geminiLoader.classList.add('hidden');
+            }
+        }
+        
+        getSuggestionBtn.addEventListener('click', getMealSuggestions);
+
+    </script>
+
+</body>
+</html>
+
